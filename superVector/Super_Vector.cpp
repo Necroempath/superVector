@@ -1,0 +1,140 @@
+#include "Super_Vector.h"
+
+SuperVector::SuperVector() : _data(nullptr), _size(0), _capacity(0) {}
+
+SuperVector::SuperVector(size_t size) : _size(size), _capacity(size * 1.5f)
+{
+    _data = new float[_capacity];
+}
+
+SuperVector::SuperVector(const SuperVector& other) : _size(other._size), _capacity(other._capacity)
+{
+    _data = new float[_capacity];
+
+    for (size_t i = 0; i < _size; i++)
+    {
+        _data[i] = other._data[i];
+    }
+}
+
+SuperVector::SuperVector(SuperVector&& other) noexcept : _data(other._data), _size(other._size), _capacity(other._capacity)
+{
+    other._data = nullptr;
+    other._size = 0;
+    other._capacity = 0;
+}
+
+size_t SuperVector::Size() const
+{
+    return _size;
+}
+
+float& SuperVector::operator[](int index)
+{
+    if (index >= 0 && index < _size)
+        return _data[index];
+}
+
+const float SuperVector::operator[](int index) const
+{
+    if (index >= 0 && index < _size)
+        return _data[index];
+}
+
+SuperVector SuperVector::operator/(const SuperVector& other) const
+{
+    int size = _size < other.Size() ? _size : other.Size();
+
+    SuperVector vector(size);
+
+    for (size_t i = 0; i < size; i++)
+    {
+        if (vector._data[i] == 0)
+            return *this;
+    }
+
+    for (size_t i = 0; i < size; i++)
+    {
+        vector._data[i] = _data[i] / other._data[i];
+    }
+
+    return vector;
+}
+
+SuperVector SuperVector::operator*(const SuperVector& other) const
+{
+    int size = _size < other.Size() ? _size : other.Size();
+
+    SuperVector vector(size);
+
+    for (size_t i = 0; i < size; i++)
+    {
+        vector._data[i] = _data[i] * other._data[i];
+    }
+
+    return vector;
+}
+
+SuperVector SuperVector::operator-(const SuperVector& other) const
+{
+    int size = _size < other.Size() ? _size : other.Size();
+
+    SuperVector vector(size);
+
+    for (size_t i = 0; i < size; i++)
+    {
+        vector._data[i] = _data[i] - other._data[i];
+    }
+
+    return vector;
+}
+
+SuperVector SuperVector::operator+(const SuperVector& other) const
+{
+    int size = _size < other.Size() ? _size : other.Size();
+
+    SuperVector vector(size);
+
+    for (size_t i = 0; i < size; i++)
+    {
+        vector._data[i] = _data[i] + other._data[i];
+    }
+
+    return vector;
+}
+
+SuperVector& SuperVector::operator=(SuperVector&& vector) noexcept
+{
+    if (&vector == this) return *this;
+
+    _size = vector._size;
+    _capacity = vector._capacity;
+    _data = vector._data;
+
+    vector._size = 0;
+    vector._capacity = 0;
+    vector._data = nullptr;
+
+    return *this;
+}
+
+SuperVector& SuperVector::operator=(const SuperVector& vector)
+{
+    if (&vector == this) return *this;
+
+    _size = vector._size;
+    _capacity = vector._capacity;
+    _data = new float[_capacity];
+
+    for (size_t i = 0; i < _size; i++)
+    {
+        _data[i] = vector._data[i];
+    }
+
+    return *this;
+}
+
+SuperVector::~SuperVector()
+{
+    delete[] _data;
+}
