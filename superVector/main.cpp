@@ -26,7 +26,7 @@ int main()
     vector[3] = 0;
     vector[4] = -11;
 
-    vector = vector_1 + vector; 
+    vector /= 2; 
 
     DisplayVector(vector);
 

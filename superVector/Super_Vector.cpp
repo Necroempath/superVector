@@ -24,7 +24,7 @@ SuperVector::SuperVector(SuperVector&& other) noexcept : _data(other._data), _si
     other._capacity = 0;
 }
 
-size_t SuperVector::Size() const
+inline size_t SuperVector::Size() const
 {
     return _size;
 }
@@ -61,6 +61,20 @@ SuperVector SuperVector::operator/(const SuperVector& other) const
     return vector;
 }
 
+SuperVector SuperVector::operator/(const float& scalar) const
+{
+    if (scalar == 0) return *this;
+
+    SuperVector vector(Size());
+
+    for (size_t i = 0; i < Size(); i++)
+    {
+        vector._data[i] = _data[i] / scalar;
+    }
+
+    return vector;
+}
+
 SuperVector SuperVector::operator*(const SuperVector& other) const
 {
     int size = _size < other.Size() ? _size : other.Size();
@@ -70,6 +84,18 @@ SuperVector SuperVector::operator*(const SuperVector& other) const
     for (size_t i = 0; i < size; i++)
     {
         vector._data[i] = _data[i] * other._data[i];
+    }
+
+    return vector;
+}
+
+SuperVector SuperVector::operator*(const float& scalar) const
+{
+    SuperVector vector(Size());
+
+    for (size_t i = 0; i < Size(); i++)
+    {
+        vector._data[i] = _data[i] * scalar;
     }
 
     return vector;
@@ -130,6 +156,34 @@ SuperVector& SuperVector::operator=(const SuperVector& vector)
     {
         _data[i] = vector._data[i];
     }
+
+    return *this;
+}
+
+SuperVector& SuperVector::operator+=(const SuperVector& other)
+{
+    *this = *this + other;
+
+    return *this;
+}
+
+SuperVector& SuperVector::operator-=(const SuperVector& other)
+{
+    *this = *this - other;
+
+    return *this;
+}
+
+SuperVector& SuperVector::operator*=(const float& scalar)
+{
+    *this = *this * scalar;
+
+    return *this;
+}
+
+SuperVector& SuperVector::operator/=(const float& scalar)
+{
+    *this = *this / scalar;
 
     return *this;
 }

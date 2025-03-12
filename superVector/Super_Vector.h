@@ -25,7 +25,19 @@ public:
 
     SuperVector operator*(const SuperVector& other) const;
 
+    SuperVector operator*(const float& scalar) const;
+
     SuperVector operator/(const SuperVector& other) const;
+
+    SuperVector operator/(const float& scalar) const;
+
+    SuperVector& operator+=(const SuperVector& other);
+
+    SuperVector& operator-=(const SuperVector& other);
+
+    SuperVector& operator*=(const float& scalar);
+
+    SuperVector& operator/=(const float& scalar);
 
     const float operator[](int index) const;
 
