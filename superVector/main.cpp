@@ -26,10 +26,10 @@ int main()
     vector[3] = 0;
     vector[4] = -11;
 
-    //vector++;
+    
     vector_1--;
     std::cout << vector++ << "\n";
     std::cout << vector;
-
+    //CANNOT OVERLOAD ISTREAM>>
     return 0;
 }
