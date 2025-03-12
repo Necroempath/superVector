@@ -1,4 +1,5 @@
 #pragma once
+#include <ostream>
 class SuperVector
 {
 private:
@@ -38,6 +39,18 @@ public:
     SuperVector& operator*=(const float& scalar);
 
     SuperVector& operator/=(const float& scalar);
+
+    friend std::ostream& operator<<(std::ostream& os, const SuperVector& vector);
+
+    friend std::istream& operator>>(std::istream& is, SuperVector& vector);
+
+    SuperVector& operator++();
+
+    SuperVector operator++(int);
+
+    SuperVector& operator--();
+
+    SuperVector operator--(int);
 
     const float operator[](int index) const;
 

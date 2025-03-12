@@ -26,9 +26,10 @@ int main()
     vector[3] = 0;
     vector[4] = -11;
 
-    vector /= 2; 
-
-    DisplayVector(vector);
+    //vector++;
+    vector_1--;
+    std::cout << vector++ << "\n";
+    std::cout << vector;
 
     return 0;
 }
