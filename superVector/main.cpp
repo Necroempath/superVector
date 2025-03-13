@@ -27,9 +27,9 @@ int main()
     vector[4] = -11;
 
     
-    vector_1--;
+ /*   vector_1--;*/
     std::cout << vector++ << "\n";
-    std::cout << vector;
+    std::cout << ++vector;
     //CANNOT OVERLOAD ISTREAM>>
     return 0;
 }

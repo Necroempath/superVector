@@ -230,7 +230,7 @@ SuperVector SuperVector::operator++(int)
     {
         _data[i]++;
     }
-    _size;
+
     return temp;
 }
 
