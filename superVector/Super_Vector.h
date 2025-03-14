@@ -7,6 +7,8 @@ private:
     size_t _size;
     size_t _capacity;
 
+    void ResizeArray(const float factor);
+
 public:
     SuperVector();
 
@@ -57,6 +59,14 @@ public:
     float& operator[](int index);
 
     size_t Size() const;
+
+    void PushBack(float value);
+
+    bool Insert(int index, float value);
+
+    void Pop();
+
+    bool Remove(int index);
 
     ~SuperVector();
 

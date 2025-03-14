@@ -24,6 +24,20 @@ SuperVector::SuperVector(SuperVector&& other) noexcept : _data(other._data), _si
     other._capacity = 0;
 }
 
+void SuperVector::ResizeArray(const float factor)
+{
+    float* temp = new float[_capacity * factor]();
+
+    for (int i = 0; i < _size; i++)
+    {
+        temp[i] = _data[i];
+    }
+
+    _capacity *= factor; //comment this and catch sweet bug)
+    delete[] _data;
+    _data = temp;
+}
+
 inline size_t SuperVector::Size() const
 {
     return _size;
@@ -206,7 +220,7 @@ std::ostream& operator<<(std::ostream& os, const SuperVector& vector)
 //{
 //    for (size_t i = 0; i < vector.Size(); i++)
 //    {
-//        is >> vector._data[i];
+//        is >> vector[i];
 //    }
 //
 //    return is;
@@ -254,6 +268,51 @@ SuperVector SuperVector::operator--(int)
     }
 
     return temp;
+}
+
+void SuperVector::PushBack(float value)
+{
+    if (_size == _capacity) ResizeArray(1.5f);
+
+    _data[_size++] = value;
+}
+
+bool SuperVector::Insert(int index, float value)
+{
+    if (index < 0 || index > _size) return 0;
+
+    if (_size == _capacity) ResizeArray(1.5f);
+
+    for (int i = _size; i > index; i--)
+    {
+        _data[i] = _data[i - 1];
+
+    }
+
+    _data[index] = value;
+
+    _size++;
+    return 1;
+}
+
+void SuperVector::Pop()
+{
+    _data[--_size] = 0;
+
+    if (_size <= _capacity * 0.7f) ResizeArray(0.7f);
+}
+
+bool SuperVector::Remove(int index)
+{
+    if (index < 0 || index >= _size) return 0;
+
+    for (int i = index; i < _size - 1; i++)
+    {
+        _data[i] = _data[i + 1];
+    }
+
+    Pop();
+    return true;
 }
 
 SuperVector::~SuperVector()

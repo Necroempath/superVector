@@ -29,7 +29,10 @@ int main()
     
  /*   vector_1--;*/
     std::cout << vector++ << "\n";
-    std::cout << ++vector;
+    vector.PushBack(7.1);
+    std::cout << ++vector << "\n";
+    vector.Remove(1);
+    std::cout << vector;
     //CANNOT OVERLOAD ISTREAM>>
     return 0;
 }
