@@ -15,11 +15,11 @@ int main()
     SuperVector<double> vector = {1,2,3,4,5};
     SuperVector<short> vector_1(5);
     
-    std::cout << vector++ << "\n";
+   /* std::cout << vector++ << "\n";
     vector.PushBack(17.2);
     std::cout << ++vector << "\n";
     vector.Remove(1);
-    std::cout << vector;
+    std::cout << vector;*/
 
     return 0;
 }

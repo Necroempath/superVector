@@ -141,7 +141,7 @@ public:
     {
         size_t size = _size < other.Size() ? _size : other.Size();
 
-        SuperVector vector(size);
+        SuperVector vector(*this);
 
         for (size_t i = 0; i < size; i++)
         {
@@ -155,7 +155,7 @@ public:
     {
         size_t size = _size < other.Size() ? _size : other.Size();
 
-        SuperVector vector(size);
+        SuperVector vector(*this);
 
         for (size_t i = 0; i < size; i++)
         {
