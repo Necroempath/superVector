@@ -311,10 +311,7 @@ SuperVector SuperVector::operator--(int)
 
 void SuperVector::PushBack(float value)
 {
-    if (!_data) {
-        _capacity = 5;
-        _data = new float[_capacity];
-    }
+    if (!_data) return;
     if (_size == _capacity) ResizeArray(ascending_factor);
 
     _data[_size++] = value;
@@ -324,10 +321,7 @@ bool SuperVector::Insert(size_t index, float value)
 {
     if (index < 0 || index > _size) return 0;
 
-    if (!_data) {
-        _capacity = 5;
-        _data = new float[_capacity];
-    }
+    if (!_data) return 0;
 
     if (_size == _capacity) ResizeArray(ascending_factor);
 
@@ -346,9 +340,7 @@ bool SuperVector::Pop()
 {
     if (!_data || _size == 0) return 0;
 
-    _data[--_size] = _data[_capacity - 1];
-
-    if (_size <= _capacity * 0.7f) ResizeArray(descending_factor);
+    if (--_size <= _capacity * descending_factor) ResizeArray(descending_factor);
     return 1;
 }
 
