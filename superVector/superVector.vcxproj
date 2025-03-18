@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Super_Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Super_Vector.h" />
